@@ -1,0 +1,1 @@
+function e(e){let t=new Date(e);return`${t.toISOString().slice(0,10)} ${t.toISOString().slice(11,16)} UTC`}function t(e){return new Date(e).toISOString().slice(0,10)}function n(e){return`${new Date(e).toISOString().slice(11,19)}Z`}function r(e){return`${Math.round(e*100)}%`}export{n as i,e as n,t as r,r as t};
