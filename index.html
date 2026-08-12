@@ -1,6 +1,19 @@
 <!DOCTYPE html><html lang="en"><head>
 
 <script>
+// Prevent Remix prefetch crashes
+const _originalFetch = window.fetch;
+window.fetch = async (...args) => {
+    const url = typeof args[0] === 'string' ? args[0] : (args[0] ? args[0].url : '');
+    if (url && (url.includes('?_data=') || url.includes('&_data='))) {
+        return new Response('{}', { status: 200, headers: { 'Content-Type': 'application/json' } });
+    }
+    return _originalFetch(...args);
+};
+</script>
+
+
+<script>
 // Fix for statically scraped Remix/React Router SPA
 document.addEventListener('click', function(e) {
     const a = e.target.closest('a');
